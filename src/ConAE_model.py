@@ -24,6 +24,6 @@ def ConAE():
     return autoencoder
 
 if __name__ == "__main__":
-    model = ConAE()
+    ConAE_model = ConAE()
 
 
