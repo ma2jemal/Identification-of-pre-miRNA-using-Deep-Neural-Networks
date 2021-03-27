@@ -7,7 +7,7 @@ from dataVectorization import vectorize_data
 # generate the train(4/5) and test datasets(1/5)
 def train_test_partition(positive_file,negative_file):
     # generate the vectorized xs and ys
-    x_dataset,y_dataset =  vectorize_data(positive_file,negative_file)
+    x_dataset,y_dataset = vectorize_data(positive_file,negative_file)
     print("data vectorization in function train_test_partition finished!")
     print(len(x_dataset))
     # generate test and train dataset

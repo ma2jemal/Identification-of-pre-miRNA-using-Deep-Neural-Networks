@@ -63,7 +63,7 @@ def test_evaluation(model_path,x_test_dataset, y_test_dataset):
     return sensitivity,specifity,f1_score,mcc,accuracy
 
 if __name__ == "__main__":
-    model_path = "ConAE_model.h5"
+    model_path = "CNN_model.h5"
 
     positive = "../data/hsa_new.csv"
     negative = "../data/pseudo_new.csv"

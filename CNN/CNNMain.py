@@ -5,12 +5,12 @@
 
 import sys
 sys.path.append("../data")
-from Train import Train
-from Evaluation import test_evaluation
+from CNNTrain import CNN_train
+from CNNEvaluation import test_evaluation
 import dataSetPartition
 import time
 
-def Main():
+def CNNMain():
     # positive and negative dataset
     positive = "../data/hsa_new.csv"
     negative = "../data/pseudo_new.csv"
@@ -19,8 +19,8 @@ def Main():
         dataSetPartition.train_test_partition(positive,negative)
     # train the model
 
-    model = Train(x_train_dataset,y_train_dataset)
-    model_path = "CovAEmodel.h5"
+    model = CNN_train(x_train_dataset,y_train_dataset)
+    model_path = "CNN_model.h5"
     model.save(model_path)
     print("The model is saved as",model_path,"in the current directory.")
 
@@ -35,8 +35,8 @@ def Main():
         dataSetPartition.fold10_cv_partition(positive,negative)
     m = len(x_train_list)
     for i in range(m):
-        model = Train(x_train_list[i],y_train_list[i])
-        model_path = "ConvAEmodel_10fold"+str(i)+".h5"
+        model = CNN_train(x_train_list[i],y_train_list[i])
+        model_path = "CNN_model_10fold"+str(i)+".h5"
         model.save(model_path)
         print(model_path,"is stored in the current directory.")
         # evaluate the performance
@@ -49,7 +49,7 @@ def Main():
 def write_to_file(model_path,sensitivity,specifity,accuracy,f1_score,mcc):
     """ write the performace parameters to file
     """
-    fd = open("ConAEmodel_performance","a+")
+    fd = open("CNN_model_performance","a+")
     fd.write(str(time.time())+model_path + "performance:")
     fd.write("\n")
     fd.write("sensitivity:{}\n".format(sensitivity))
@@ -63,5 +63,5 @@ def write_to_file(model_path,sensitivity,specifity,accuracy,f1_score,mcc):
 
 
 if __name__ == "__main__":
-    Main()
+    CNNMain()
     print("finished!")
