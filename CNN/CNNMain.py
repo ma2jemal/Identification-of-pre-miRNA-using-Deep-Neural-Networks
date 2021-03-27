@@ -63,5 +63,7 @@ def write_to_file(model_path,sensitivity,specifity,accuracy,f1_score,mcc):
 
 
 if __name__ == "__main__":
+    start = time.time()
     CNNMain()
-    print("finished!")
+    end = time.time()
+    print("finished! and it took " + str(end-start))
