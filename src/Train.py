@@ -10,9 +10,9 @@ import os
 
 def Train(x_dataset,y_dataset):
     model = ConAE()
-    if os.path.exists("CNN_model_preTrained.h5"):
-        print("load the weights")
-        model.load_weights("CNN_model_preTrained.h5")
+    # if os.path.exists("CNN_model_preTrained.h5"):
+    #     print("load the weights")
+    #     model.load_weights("CNN_model_preTrained.h5")
     model.fit(x_dataset,y_dataset,batch_size = 200, epochs = 600,\
           validation_split = 0.2)
     print("Model.py train over")
