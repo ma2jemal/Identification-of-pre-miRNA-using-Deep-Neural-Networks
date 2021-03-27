@@ -1,0 +1,29 @@
+import keras
+from keras.layers import Input, Conv1D, MaxPooling1D, UpSampling1D
+from keras.models import Model
+
+def ConAE():
+
+    numberOfRows = 1881
+    noOfInputs = input(numberOfRows)
+    L1 = Conv1D(32, 4, activation='relu' , padding = 'same')(noOfInputs)
+    L2 = MaxPooling1D((2, 2), padding='same')(L1)
+    L3 = Conv1D(32,4 ,activation='relu', padding = 'same')(L2)
+    L4 = MaxPooling1D((2, 2), padding='same')(L3)#encoded
+
+    L5 = Conv1D(32, 4, activation='relu', padding='same')(L4)
+    L6 = UpSampling1D((2, 2))(L5)
+    L7 = Conv1D(32,4, activation='relu', padding='same')(L6)
+    L8 = UpSampling1D((2, 2))(L7)
+    Lf = Conv1D(2,  activation='softmax')(L8)
+
+    autoencoder = Model(noOfInputs, Lf)
+    autoencoder.compile(optimizer='adam', loss = 'binary_crossentropy', metrics=['accuracy'])
+    print(autoencoder.summary())
+
+    return autoencoder
+
+if __name__ == "__main__":
+    model = ConAE()
+
+
