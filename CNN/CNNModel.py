@@ -22,12 +22,12 @@ def CNN_model():
     model.add(MaxPooling1D(pool_size = 2))
 
     model.add(Flatten())
-    # model.add(Dropout(0.5))
+    model.add(Dropout(0.2))
     model.add(Dense(32,activation = 'relu',kernel_regularizer = regularizers.l2(0.1)))
-    # model.add(Dropout(0.2))
+    model.add(Dropout(0.2))
     model.add(Dense(2,activation = 'sigmoid'))
     adam = Adam()
-    model.compile(loss = 'binary_crossentropy',optimizer = adam,\
+    model.compile(loss = 'categorical_crossentropy',optimizer = adam,\
               metrics = ['accuracy'])
     print(model.summary())
     return model
