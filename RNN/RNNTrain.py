@@ -14,7 +14,7 @@ def RNN_train(x_dataset,y_dataset):
         print("load the weights")
         model.load_weights("RNN_model_preTrained.h5")
         
-    model.fit(x_dataset,y_dataset,batch_size = 150, epochs = 600,\
+    model.fit(x_dataset,y_dataset,batch_size = 150, epochs = 300,\
           validation_split = 0.2)
     print("model train over")
     return model
