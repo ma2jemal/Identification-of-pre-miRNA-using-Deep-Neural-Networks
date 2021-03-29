@@ -4,7 +4,7 @@
 import keras
 from keras import regularizers
 from keras.models import Sequential
-from keras.layers import Activation, Dropout, Dense, BatchNormalization
+from keras.layers import Activation
 from keras.layers import LSTM,Masking
 from keras.optimizers import Adam
 
