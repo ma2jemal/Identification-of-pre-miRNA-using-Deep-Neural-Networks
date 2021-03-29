@@ -4,7 +4,7 @@
 import keras
 from keras import regularizers
 from keras.models import Sequential
-from keras.layers import Activation
+from keras.layers import Activation, Dropout, Dense, BatchNormalization
 from keras.layers import LSTM,Masking
 from keras.optimizers import Adam
 
@@ -15,10 +15,10 @@ def RNN_model():
     model = Sequential()
     model.add(Masking(mask_value= [0,0,0,0,0,0,0,0,0,0,0,0],\
              input_shape=(SEG_LENTH, 12)))
-    model.add(LSTM(64,dropout=0.3, recurrent_dropout=0.2,\
+    model.add(LSTM(64,dropout=0.2, recurrent_dropout=0.2,\
                   kernel_regularizer = regularizers.l2(0.1),\
                    input_shape = (SEG_LENTH, 12),return_sequences = True))
-    model.add(LSTM(32,dropout=0.3, recurrent_dropout=0.2,\
+    model.add(LSTM(64,dropout=0.2, recurrent_dropout=0.2,\
                   kernel_regularizer = regularizers.l2(0.1),
                    return_sequences = True))
     model.add(LSTM(2))
