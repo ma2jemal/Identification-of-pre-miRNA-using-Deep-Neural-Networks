@@ -28,7 +28,7 @@ def ROC_curve():
     cnn_predict_result = CNN_model.predict(x_test_dataset)
     rnn_predict_result = RNN_model.predict(x_test_dataset)
 
-    print(predict_result)
+    # print(predict_result)
 
     # Compute ROC curve and ROC area for each class
     cnn_fpr,cnn_tpr,cnn_threshold = roc_curve(y_test_dataset[:,0],cnn_predict_result[:,0]) 
