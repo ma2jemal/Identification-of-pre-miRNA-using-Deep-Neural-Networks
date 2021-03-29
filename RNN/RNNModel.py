@@ -21,7 +21,7 @@ def RNN_model():
     model.add(BatchNormalization(momentum=0.9, epsilon=1e-5, axis=1))
     model.add(GRU(64,dropout=0.2, recurrent_dropout=0.2,\
                    kernel_regularizer = regularizers.l2(0.1),
-                   return_sequences = True))
+                   return_sequences = False))
 
     model.add(GRU(2))
     model.add(Activation('softmax'))
