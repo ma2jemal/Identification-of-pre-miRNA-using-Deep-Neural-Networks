@@ -72,4 +72,4 @@ if __name__ == "__main__":
 
     sensitivity,specifity,f1_score,mcc,accuracy =\
     test_evaluation(model_path,x_test_dataset,y_test_dataset)
-#    print(sensitivity,specifity,f1_score,mcc,accuracy)
+    # print(sensitivity,specifity,f1_score,mcc,accuracy)

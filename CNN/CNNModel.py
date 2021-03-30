@@ -26,14 +26,12 @@ def CNN_model():
     model.add(Dropout(0.5))
 
     model.add(Dense(64, activation='relu'))
-    # model.add(MaxoutDense(512, nb_feature=4))
     model.add(Dropout(0.5))
 
     model.add(Dense(32, activation='relu', kernel_regularizer=regularizers.l2(1e-4)))
-    # model.add(MaxoutDense(512, nb_feature=4,))
     model.add(Dense(2, activation='softmax'))
+
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-    #plot_model(model, to_file='model_struct.png', show_shapes=True, show_layer_names=False)
 
     model.summary()
     return model
