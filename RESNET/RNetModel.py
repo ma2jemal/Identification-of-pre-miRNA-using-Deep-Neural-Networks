@@ -1,22 +1,9 @@
-""" Construct the CNN model for deep learning
-"""
-#
-# import keras
-# from keras import regularizers
-# from keras.models import Sequential, Model
-# from keras.layers import Dense,Activation,Dropout,Flatten, Input, GRU, MaxPool1D
-# from keras.layers import Conv1D,MaxPooling1D, BatchNormalization
-# from keras.optimizers import Adam
-# from tensorflow.python.keras.utils.vis_utils import plot_model
-# import pydot
-
-
 import tensorflow.keras as keras
 import tensorflow as tf
 import numpy as np
 
 
-def CNN_model():
+def RNetModel():
     n_feature_maps = 64
 
     input_layer = keras.layers.Input((180, 12))
@@ -94,6 +81,5 @@ def CNN_model():
     model.summary()
     return model
 if __name__ == "__main__":
-     model = CNN_model()
-
+     model = RNetModel()
 
