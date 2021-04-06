@@ -1,7 +1,7 @@
 """Evaluate the performance of the trained model using the test dataset
 """
 from keras.models import load_model
-from keras.models import Sequential
+# from keras.models import Sequential
 import numpy as np
 import math
 import sys
