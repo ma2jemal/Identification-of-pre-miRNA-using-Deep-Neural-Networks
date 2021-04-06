@@ -32,6 +32,7 @@ def test_evaluation(model_path,x_test_dataset, y_test_dataset):
     print("load the model")
     try:
          model = load_model(model_path)
+         print("model_loaded.")
     except Exception:
         print("The model file doesn't exist!")
         exit(1)
