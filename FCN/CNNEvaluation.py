@@ -1,6 +1,6 @@
 """Evaluate the performance of the trained model using the test dataset
 """
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 # from keras.models import Sequential
 import numpy as np
 import math
@@ -30,12 +30,12 @@ def predict_comparision(y_predict,y_test):
 # calculate SENS, SPEC, ACC and Matthews Correlation Coefficient (MCC)
 def test_evaluation(model_path,x_test_dataset, y_test_dataset):
     print("load the model")
-    try:
-         model = load_model(model_path)
-         print("model_loaded.")
-    except Exception:
-        print("The model file doesn't exist!")
-        exit(1)
+#    try:
+    model = load_model(model_path)
+    print("model_loaded.")
+ #   except Exception:
+  #      print("The model file doesn't exist!")
+   #     exit(1)
     predict_result = model.predict(x_test_dataset)
 #     calculate tp,tn,fp,fn
     tp,tn,fp,fn = predict_comparision(predict_result,y_test_dataset)
