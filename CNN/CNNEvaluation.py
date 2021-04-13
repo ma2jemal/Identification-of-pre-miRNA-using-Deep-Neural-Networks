@@ -39,8 +39,9 @@ def test_evaluation(model_path,x_test_dataset, y_test_dataset):
     predict_result = model.predict(x_test_dataset)
 #     calculate tp,tn,fp,fn
     tp,tn,fp,fn = predict_comparision(predict_result,y_test_dataset)
-    
-#    calculate sens, spec, f1,mcc and acc based on tp,tn,fp,fn   
+
+    avgAcc = []
+#    calculate sens, spec, f1,mcc and acc based on tp,tn,fp,fn
     try:
         sensitivity = float(tp)/(float(tp) + float(fn))
         specifity = float(tn)/(float(tn) + float(fp))

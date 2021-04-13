@@ -33,6 +33,12 @@ def CNNMain():
     # and the remaining nine segments for train. All the data are stored in four list
     x_train_list,y_train_list,x_validation_list,y_validation_list = \
         dataSetPartition.fold10_cv_partition(positive,negative)
+    sen = []
+    spec = []
+    acc = []
+    f1 = []
+    mc = []
+
     m = len(x_train_list)
     for i in range(m):
         model = CNN_train(x_train_list[i],y_train_list[i])
@@ -42,9 +48,14 @@ def CNNMain():
         # evaluate the performance
         sensitivity,specifity,f1_score,mcc,accuracy =\
             test_evaluation(model_path,x_validation_list[i],y_validation_list[i])
+        sen.append(round(sensitivity,2))
+        spec.append(round(specifity,2))
+        acc.append(round(accuracy,2))
+        f1.append(round(f1_score,2))
+        mc.append(round(mcc,2))
         # write to file
         write_to_file(model_path,sensitivity,specifity,accuracy,f1_score,mcc)
-
+    write_to_file("CNN_model_performanceAVG", avg(sen), avg(spec), avg(acc), avg(f1), avg(mc))
 
 def write_to_file(model_path,sensitivity,specifity,accuracy,f1_score,mcc):
     """ write the performace parameters to file
@@ -60,7 +71,8 @@ def write_to_file(model_path,sensitivity,specifity,accuracy,f1_score,mcc):
     fd.write("\n\n")
     fd.close()
     
-
+def avg(a):
+    return sum(a)/len(a)
 
 if __name__ == "__main__":
     start = time.time()

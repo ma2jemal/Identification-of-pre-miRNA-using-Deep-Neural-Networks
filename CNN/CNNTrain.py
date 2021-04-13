@@ -24,6 +24,6 @@ if __name__ == "__main__":
     x_train_dataset,y_train_dataset,x_test_dataset,y_test_dataset = \
       dataSetPartition.train_test_partition(positive,negative)
     model = CNN_train(x_train_dataset,y_train_dataset)
-#   model.save("CNN_model_preTrained.h5")
-#   print("The model is saved as CNN_model_preTrained.h5 in the current directory")
+    # model.save("CNN_model_preTrained.h5")
+    # print("The model is saved as CNN_model_preTrained.h5 in the current directory")
 

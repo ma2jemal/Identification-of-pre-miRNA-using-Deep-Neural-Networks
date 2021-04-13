@@ -32,8 +32,6 @@ def generate_new_data():
 
     # process the positive data
 
-    print(hsa.shape)
-    print(pseudo.shape)
     hsa = hsa.loc[:,["Accession","HairpinSequence","RNAFolds"]]
     hsa['Classification'] = "TRUE"
     # merge HairpinSequence and RNAFolds in hsa

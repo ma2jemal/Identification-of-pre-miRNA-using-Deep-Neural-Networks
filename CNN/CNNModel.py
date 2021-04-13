@@ -17,7 +17,7 @@ import numpy as np
 
 
 def CNN_model():
-    n_feature_maps = 64
+    n_feature_maps = 32
 
     input_layer = keras.layers.Input((180, 12))
 
