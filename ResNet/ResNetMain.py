@@ -5,12 +5,12 @@
 
 import sys
 sys.path.append("../data")
-from CNNTrain import CNN_train
-from CNNEvaluation import test_evaluation
+from ResNetTrain import ResNet_train
+from ResNetEvaluation import test_evaluation
 import dataSetPartition
 import time
 
-def CNNMain():
+def ResNetMain():
     # positive and negative dataset
     positive = "../data/hsa_new.csv"
     negative = "../data/pseudo_new.csv"
@@ -19,8 +19,8 @@ def CNNMain():
         dataSetPartition.train_test_partition(positive,negative)
     # train the model
 
-    model = CNN_train(x_train_dataset,y_train_dataset)
-    model_path = "CNN_model.h5"
+    model = ResNet_train(x_train_dataset,y_train_dataset)
+    model_path = "ResNet_model.h5"
     model.save(model_path)
     print("The model is saved as",model_path,"in the current directory.")
 
@@ -32,7 +32,7 @@ def CNNMain():
     # Partition the whole dataset into 10 segments with every one segment for test and
     # and the remaining nine segments for train. All the data are stored in four list
     x_train_list,y_train_list,x_validation_list,y_validation_list = \
-        dataSetPartition.fold10_cv_partition(positive,negative)
+        dataSetPartition.fold5_cv_partition(positive,negative)
     sen = []
     spec = []
     acc = []
@@ -41,26 +41,26 @@ def CNNMain():
 
     m = len(x_train_list)
     for i in range(m):
-        model = CNN_train(x_train_list[i],y_train_list[i])
-        model_path = "CNN_model_10fold"+str(i)+".h5"
+        model = ResNet_train(x_train_list[i],y_train_list[i])
+        model_path = "ResNet_model_10fold"+str(i)+".h5"
         model.save(model_path)
         print(model_path,"is stored in the current directory.")
         # evaluate the performance
         sensitivity,specifity,f1_score,mcc,accuracy =\
             test_evaluation(model_path,x_validation_list[i],y_validation_list[i])
-        sen.append(round(sensitivity,2))
-        spec.append(round(specifity,2))
-        acc.append(round(accuracy,2))
-        f1.append(round(f1_score,2))
-        mc.append(round(mcc,2))
+        sen.append(sensitivity)
+        spec.append(specifity)
+        acc.append(accuracy)
+        f1.append(f1_score)
+        mc.append(mcc)
         # write to file
         write_to_file(model_path,sensitivity,specifity,accuracy,f1_score,mcc)
-    write_to_file("CNN_model_performanceAVG", avg(sen), avg(spec), avg(acc), avg(f1), avg(mc))
+    write_to_file("ResNet_model_performanceAVG", avg(sen), avg(spec), avg(acc), avg(f1), avg(mc))
 
 def write_to_file(model_path,sensitivity,specifity,accuracy,f1_score,mcc):
     """ write the performace parameters to file
     """
-    fd = open("CNN_model_performance","a+")
+    fd = open("ResNet_model_performance","a+")
     fd.write(str(time.time())+model_path + "performance:")
     fd.write("\n")
     fd.write("sensitivity:{}\n".format(sensitivity))
@@ -72,10 +72,10 @@ def write_to_file(model_path,sensitivity,specifity,accuracy,f1_score,mcc):
     fd.close()
     
 def avg(a):
-    return sum(a)/len(a)
+    return round(sum(a)/len(a),2)
 
 if __name__ == "__main__":
     start = time.time()
-    CNNMain()
+    ResNetMain()
     end = time.time()
     print("finished! and it took " + str(end-start))
