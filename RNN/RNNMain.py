@@ -28,10 +28,10 @@ def RNNMain():
         test_evaluation(model_path,x_test_dataset,y_test_dataset)
     write_to_file(model_path,sensitivity,specifity,accuracy,f1_score,mcc)
 
-    # Partition the whole dataset into 10 segments with every one segment for test and
+    # Partition the whole dataset into 5 segments with every one segment for test and
     # and the remaining nine segments for train. All the data are stored in four list 
     x_train_list,y_train_list,x_validation_list,y_validation_list = \
-        dataSetPartition.fold10_cv_partition(positive,negative)
+        dataSetPartition.fold5_cv_partition(positive,negative)
     m = len(x_train_list)
     for i in range(m):
         model = RNN_train(x_train_list[i],y_train_list[i])

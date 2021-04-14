@@ -18,33 +18,35 @@ def train_test_partition(positive_file,negative_file):
     print("train_test_partition finished!")
     return x_train_dataset,y_train_dataset,x_test_dataset,y_test_dataset
 
-# Partition of data set for 10-fold cross validation
-def fold10_cv_partition(positive_file,negative_file):
+# Partition of data set for 5-fold cross validation
+def fold5_cv_partition(positive_file,negative_file):
     # generate the vectorized xs and ys
     x_dataset,y_dataset =  vectorize_data(positive_file,negative_file)
-    print("data vectorization in function fold10_cv_partition finished!")
-    # Divided into 10 parts
+    print("data vectorization in function fold5_cv_partition finished!")
+    # Divided into 5 parts
     max_len = len(x_dataset)
-    m = int(max_len/10)
+    m = int(max_len/5)
+    print(m)
+    print(max_len)
     # define lists storing the different partitions 
     x_train_segment = []
     y_train_segment = []
     x_validation_segment = []
     y_validation_segment = []
 
-    # Partition of data set for 10-fold cross validation 
+    # Partition of data set for 5-fold cross validation
     # generate the first nine dataset segments 
-    for i in range(9):
+    for i in range(4):
         x_validation_segment.append(x_dataset[m*i:m*(i+1)])
         y_validation_segment.append(y_dataset[m*i:m*(i+1)])
         x_train_segment.append(np.concatenate([x_dataset[0:m*i], x_dataset[m*(i+1):max_len]]))
         y_train_segment.append(np.concatenate([y_dataset[0:m*i], y_dataset[m*(i+1):max_len]]))                    
     # generate the last dataset segments 
-    x_validation_segment.append(x_dataset[m*9:max_len])
-    y_validation_segment.append(y_dataset[m*9:max_len])
-    x_train_segment.append(x_dataset[0:m*9])   
-    y_train_segment.append(y_dataset[0:m*9])
-    print("Partition of fold 10 finished!")
+    x_validation_segment.append(x_dataset[m*4:max_len])
+    y_validation_segment.append(y_dataset[m*4:max_len])
+    x_train_segment.append(x_dataset[0:m*4])
+    y_train_segment.append(y_dataset[0:m*4])
+    print("Partition of fold 5 finished!")
     return x_train_segment,y_train_segment,x_validation_segment,y_validation_segment
 
 if __name__ == "__main__":
@@ -56,7 +58,7 @@ if __name__ == "__main__":
     print(len(x_test_dataset),len(y_test_dataset))
 
     x_train_segment,y_train_segment,x_validation_segment,y_validation_segment = \
-    fold10_cv_partition(positive,negative)
+    fold5_cv_partition(positive,negative)
     #print(y_train_segment[0])
     print(len(x_train_segment),len(y_train_segment))
     print(len(x_validation_segment),len(y_validation_segment))
