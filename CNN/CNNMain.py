@@ -5,12 +5,12 @@
 
 import sys
 sys.path.append("../data")
-from MLPTrain import MLP_train
-from MLPEvaluation import test_evaluation
+from CNNTrain import CNN_train
+from CNNEvaluation import test_evaluation
 import dataSetPartition
 import time
 
-def MLPMain():
+def CNNMain():
     # positive and negative dataset
     positive = "../data/hsa_new.csv"
     negative = "../data/pseudo_new.csv"
@@ -19,8 +19,8 @@ def MLPMain():
         dataSetPartition.train_test_partition(positive,negative)
     # train the model
 
-    model = MLP_train(x_train_dataset,y_train_dataset)
-    model_path = "MLP_model.h5"
+    model = CNN_train(x_train_dataset,y_train_dataset)
+    model_path = "CNN_model.h5"
     model.save(model_path)
     print("The model is saved as",model_path,"in the current directory.")
 
@@ -29,7 +29,7 @@ def MLPMain():
         test_evaluation(model_path,x_test_dataset,y_test_dataset)
     write_to_file(model_path,sensitivity,specifity,accuracy,f1_score,mcc)
 
-    # Partition the whole dataset into 5 segments with every one segment for test and
+    # Partition the whole dataset into 10 segments with every one segment for test and
     # and the remaining nine segments for train. All the data are stored in four list
     x_train_list,y_train_list,x_validation_list,y_validation_list = \
         dataSetPartition.fold5_cv_partition(positive,negative)
@@ -41,8 +41,8 @@ def MLPMain():
 
     m = len(x_train_list)
     for i in range(m):
-        model = MLP_train(x_train_list[i],y_train_list[i])
-        model_path = "MLP_model_5fold"+str(i)+".h5"
+        model = CNN_train(x_train_list[i],y_train_list[i])
+        model_path = "CNN_model_5fold"+str(i)+".h5"
         model.save(model_path)
         print(model_path,"is stored in the current directory.")
         # evaluate the performance
@@ -55,12 +55,12 @@ def MLPMain():
         mc.append(mcc)
         # write to file
         write_to_file(model_path,sensitivity,specifity,accuracy,f1_score,mcc)
-    write_to_file("MLP_model_performanceAVG", avg(sen), avg(spec), avg(acc), avg(f1), avg(mc))
+    write_to_file("CNN_model_performanceAVG", avg(sen), avg(spec), avg(acc), avg(f1), avg(mc))
 
 def write_to_file(model_path,sensitivity,specifity,accuracy,f1_score,mcc):
     """ write the performace parameters to file
     """
-    fd = open("MLP_model_performance","a+")
+    fd = open("../Results/CNN_model_performance", "a+")
     fd.write(str(time.time())+model_path + "performance:")
     fd.write("\n")
     fd.write("sensitivity:{}\n".format(sensitivity))
@@ -76,6 +76,6 @@ def avg(a):
 
 if __name__ == "__main__":
     start = time.time()
-    MLPMain()
+    CNNMain()
     end = time.time()
     print("finished! and it took " + str(end-start))

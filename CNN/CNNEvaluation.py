@@ -1,7 +1,7 @@
 """Evaluate the performance of the trained model using the test dataset
 """
-from tensorflow.keras.models import load_model
-# from keras.models import Sequential
+from keras.models import load_model
+from keras.models import Sequential
 import numpy as np
 import math
 import sys
@@ -31,8 +31,7 @@ def predict_comparision(y_predict,y_test):
 def test_evaluation(model_path,x_test_dataset, y_test_dataset):
     print("load the model")
     try:
-         model = load_model(model_path)
-         print("model_loaded.")
+        model = load_model(model_path)
     except Exception:
         print("The model file doesn't exist!")
         exit(1)
@@ -64,7 +63,7 @@ def test_evaluation(model_path,x_test_dataset, y_test_dataset):
     return sensitivity,specifity,f1_score,mcc,accuracy
 
 if __name__ == "__main__":
-    model_path = "MLP_model.h5"
+    model_path = "CNN_model.h5"
 
     positive = "../data/hsa_new.csv"
     negative = "../data/pseudo_new.csv"
@@ -73,4 +72,4 @@ if __name__ == "__main__":
 
     sensitivity,specifity,f1_score,mcc,accuracy =\
     test_evaluation(model_path,x_test_dataset,y_test_dataset)
-    print(sensitivity,specifity,f1_score,mcc,accuracy)
+#    print(sensitivity,specifity,f1_score,mcc,accuracy)
