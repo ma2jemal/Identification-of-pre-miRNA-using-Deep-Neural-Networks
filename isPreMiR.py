@@ -6,7 +6,7 @@
 import sys, getopt
 import numpy as np
 import os
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 #import sys
 #sys.path.append("./src/data")
 #from dataVectorization import transform_xdata
@@ -102,9 +102,9 @@ def transform_seq_struct(seq_struct):
 
 def predict_results(seq_struct_vector):
     # reload the model
-    model = load_model('CNN/CNN_model.h5')
+    model = load_model('ResNet/ResNet_model.h5')
     # prediction
-    result =  model.predict(seq_struct_vector)
+    result = model.predict(seq_struct_vector)
 
     return result
 

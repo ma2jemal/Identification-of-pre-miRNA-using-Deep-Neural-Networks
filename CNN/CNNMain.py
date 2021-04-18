@@ -60,7 +60,7 @@ def CNNMain():
 def write_to_file(model_path,sensitivity,specifity,accuracy,f1_score,mcc):
     """ write the performace parameters to file
     """
-    fd = open("../Results/CNN_model_performance", "a+")
+    fd = open("./CNN_model_performance", "a+")
     fd.write(str(time.time())+model_path + "performance:")
     fd.write("\n")
     fd.write("sensitivity:{}\n".format(sensitivity))
@@ -72,7 +72,7 @@ def write_to_file(model_path,sensitivity,specifity,accuracy,f1_score,mcc):
     fd.close()
     
 def avg(a):
-    return round(sum(a)/len(a),2)
+    return round((sum(a)/len(a))*100,2)
 
 if __name__ == "__main__":
     start = time.time()

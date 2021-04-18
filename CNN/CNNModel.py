@@ -18,8 +18,12 @@ def CNN_model():
     model.add(Conv1D(128,5,activation = 'relu',padding = 'same'))
     model.add(MaxPooling1D(pool_size = 2))
     #third layer of convolution and max-pooling
-    model.add(Conv1D(64,6,activation = 'relu',padding = 'same'))
+    model.add(Conv1D(128,6,activation = 'relu',padding = 'same'))
     model.add(MaxPooling1D(pool_size = 2))
+
+    #fourth layer of convolutional and max-pooling
+    model.add(Conv1D(64, 8, activation='relu', padding='same'))
+    model.add(MaxPooling1D(pool_size=2))
 
     model.add(Flatten())
     model.add(Dropout(0.5))
