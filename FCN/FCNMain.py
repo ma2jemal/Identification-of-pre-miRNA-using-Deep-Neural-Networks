@@ -60,7 +60,7 @@ def FCNMain():
 def write_to_file(model_path,sensitivity,specifity,accuracy,f1_score,mcc):
     """ write the performace parameters to file
     """
-    fd = open("../Results/FCN_model_performance", "a+")
+    fd = open("./FCN_model_performance", "a+")
     fd.write(str(time.time())+model_path + "performance:")
     fd.write("\n")
     fd.write("sensitivity:{}\n".format(sensitivity))

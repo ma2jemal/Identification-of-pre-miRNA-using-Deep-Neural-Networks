@@ -65,11 +65,8 @@ def generate_new_data():
     # print(pseudo)
 
     pseudo_new = pseudo.loc[:,["Accession","seq_struc","Classification"]]
-    # print(pseudo_new)
-    # print(hsa_new.columns)
-    # print(hsa_new.head())
-    # print(pseudo_new.columns)
-    # print(pseudo_new.head())
+    print(hsa_new.shape)
+    print(pseudo_new.shape)
 
     #write to file
     pseudo_new.to_csv("pseudo_new.csv")
