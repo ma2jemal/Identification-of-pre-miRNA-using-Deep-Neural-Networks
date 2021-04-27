@@ -19,7 +19,7 @@ def ResNetMain():
         dataSetPartition.train_test_partition(positive,negative)
     # train the model
 
-    model = ResNet_train(x_train_dataset,y_train_dataset)
+    model = ResNet_train(x_train_dataset,y_train_dataset, "ResNetModel")
     model_path = "ResNet_model.h5"
     model.save(model_path)
     print("The model is saved as",model_path,"in the current directory.")
@@ -41,6 +41,7 @@ def ResNetMain():
 
     m = len(x_train_list)
     for i in range(m):
+        name = "ResNet_CV" + str(i)
         model = ResNet_train(x_train_list[i],y_train_list[i])
         model_path = "ResNet_model_10fold"+str(i)+".h5"
         model.save(model_path)

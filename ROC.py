@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, auc
 from sklearn.metrics import plot_confusion_matrix
-import scikitplot as skplt
+import pandas as pd
 
 
 #from sklearn import cross_validation
@@ -34,10 +34,14 @@ def PerformancePlot():
     except Exception:
         print("The model file doesn't exist!")
         exit(1)
+
+    history = pd.DataFrame(CNN_model.history)
+    print(history)
     cnn_predict_result = CNN_model.predict(x_test_dataset)
     rnn_predict_result = RNN_model.predict(x_test_dataset)
     resnet_predict_result = ResNet_model.predict(x_test_dataset)
     fcn_predict_result = FCN_model.predict(x_test_dataset)
+
 
     # print(predict_result)
 
@@ -77,11 +81,6 @@ def PerformancePlot():
     plt.savefig("ROC_curve.png",dpi=600)
     plt.show()
 
-    titles = [("ResNet"), ("FCN")]
-    for title in titles:
-       plot_confusion_matrix(ResNet_model,x_test_dataset, y_test_dataset)
-       plt.savefig(title + ".png", dpi = 600)
-       plt.show()
 
 
 

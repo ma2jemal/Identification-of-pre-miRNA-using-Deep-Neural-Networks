@@ -19,7 +19,7 @@ def FCNMain():
         dataSetPartition.train_test_partition(positive,negative)
     # train the model
 
-    model = FCN_train(x_train_dataset,y_train_dataset)
+    model = FCN_train(x_train_dataset,y_train_dataset, "FCNModel")
     model_path = "FCN_model.h5"
     model.save(model_path)
     print("The model is saved as",model_path,"in the current directory.")
@@ -41,7 +41,8 @@ def FCNMain():
 
     m = len(x_train_list)
     for i in range(m):
-        model = FCN_train(x_train_list[i],y_train_list[i])
+        name = "FCN_CV" + str(i)
+        model = FCN_train(x_train_list[i],y_train_list[i],name)
         model_path = "FCN_model_5fold"+str(i)+".h5"
         model.save(model_path)
         print(model_path,"is stored in the current directory.")
