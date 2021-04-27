@@ -18,6 +18,7 @@ def FCN_train(x_dataset,y_dataset, str):
           validation_split = 0.2)
     history_dif = pd.DataFrame(history.history)
     path = str + ".csv"
+    history_dif.to_csv(path)
     print("model train over")
     return model
 
