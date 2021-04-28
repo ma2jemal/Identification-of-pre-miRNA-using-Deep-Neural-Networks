@@ -42,7 +42,7 @@ def ResNetMain():
     m = len(x_train_list)
     for i in range(m):
         name = "ResNet_CV" + str(i)
-        model = ResNet_train(x_train_list[i],y_train_list[i])
+        model = ResNet_train(x_train_list[i],y_train_list[i], name)
         model_path = "ResNet_model_10fold"+str(i)+".h5"
         model.save(model_path)
         print(model_path,"is stored in the current directory.")
