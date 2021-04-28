@@ -35,8 +35,6 @@ def PerformancePlot():
         print("The model file doesn't exist!")
         exit(1)
 
-    history = pd.DataFrame(CNN_model.history)
-    print(history)
     cnn_predict_result = CNN_model.predict(x_test_dataset)
     rnn_predict_result = RNN_model.predict(x_test_dataset)
     resnet_predict_result = ResNet_model.predict(x_test_dataset)
